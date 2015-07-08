@@ -1,0 +1,36 @@
+.nav, .navbar, .sidebar, .nav ul, .navbar ul, .sidebar ul
+  list-style: none
+
+  a
+    display: block
+
+.nav.horizontal ul
+  li
+    display: inline-block
+
+.navbar
+  display: block
+
+  &.fixed
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 99999
+
+  ul
+    display: table
+    vertical-align: middle
+    margin: 0
+    padding: 0
+
+    li
+      display: table-cell
+      vertical-align: middle
+      text-align: center
+
+      > a
+        white-space: nowrap
+
+.sidebar
+  li li
+    margin-left: 1em

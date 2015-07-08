@@ -1,0 +1,48 @@
+.carusel
+  display: table
+
+  a.arrow
+    display: table-cell
+    position: relative
+    text-decoration: none
+    vertical-align: middle
+    width: 5%
+    opacity: .6
+
+    &:hover
+      opacity: 1
+
+    &:before
+      display: block
+      font-family: FontAwesome
+      font-size: 3rem
+      color: white
+
+  a.l.arrow:before
+    content: "\f053"
+    float: left
+  a.r.arrow:before
+    content: "\f054"
+    float: right
+
+  .container
+    position: relative
+    width: 90%
+    display: table-cell
+    overflow-x: hidden
+
+  .wrapper
+    height: 100%
+    width: 1000%
+
+  .section
+    position: absolute
+    text-align: center
+    left: 100%
+    width: 100%
+
+    +clearfix
+
+  .pic
+    border: 7px solid white
+    height: 100%
