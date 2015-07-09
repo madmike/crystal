@@ -2,23 +2,20 @@
 (function($) {
   var methods = {
     init: function(options) {
-      return this.each(function() {
+      var images = []
+      var $obj = this.first
+
+      this.each(function() {
         var $this = $(this);
-        var settings = $this.data('lightbox');
+        var images_arr = $this.data('images') || [];
 
-        if (typeof(settings) == 'undefined') {
-          var defaults = {
-            images: $this.data('images') || null
-          }
+        images.push($this.attr('href'));
+        images = images.concat(images_arr);
 
-          settings = $.extend({}, defaults, options);
-          $this.data('lightbox', settings);
-
-          $this.on('remove', methods.destroy);
-        }
-        else settings = $.extend({}, settings, options);
-
-
+        $this.click(function(e){
+          e.preventDefault();
+          methods.show(images);
+        });
       });
     },
 
@@ -46,14 +43,14 @@
         $(image).data('section', section)
 
         $(image).on('load', function() {
-          $(this).data('section').css({/* 'max-height': this.height,  */'background-image': 'url("'+this.src+'")'});
+          $(this).data('section').css({/* 'max-height': this.height, */'background-image': 'url("'+this.src+'")'});
         });
 
         image.src = images[i];
         wrapper.append(section);
       }
       wrapper.find('.section').eq(0).addClass('current').css('left', 0);
-      block.overlay();
+      block.overlay({position: false});
     },
 
     close: function(event_or_object) {

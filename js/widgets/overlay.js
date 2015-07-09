@@ -49,7 +49,11 @@
       var overlay_obj = $('<div />').addClass('overlay');
       overlay_obj.appendTo(document.body);
       overlay_obj.data('dialog', $(obj));
-      overlay_obj.on('click.overlay', this.close);
+
+      options = obj.data('overlay');
+      if (options.position)
+        overlay_obj.on('click.overlay', this.close);
+
       $(window).on('resize.overlay', overlay.position);
       $(document).on('keyup.overlay', function(e) { if (e.keyCode == 13 || e.keyCode == 27) overlay.close() });
 
@@ -63,7 +67,9 @@
       $(obj).css({position: 'relative', display: 'none', 'z-index': 1001});
       $(obj).appendTo(overlay_obj);
       $(obj).fadeIn('slow');
-      overlay.position(obj);
+
+      if (options.position)
+        overlay.position(obj);
     },
 
     close: function(event) {
@@ -103,6 +109,7 @@
 
       var options = dialog.data('overlay');
 
+      if (options.position == false) return;
       $(dialog).position({my: options.position, at: options.position, of: document.body});
       if (parseInt($(dialog).css('top')) < 0) $(dialog).css('top', 0);
     }
